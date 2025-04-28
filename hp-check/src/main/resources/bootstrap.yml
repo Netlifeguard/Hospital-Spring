@@ -1,0 +1,22 @@
+server:
+  port: 8094
+spring:
+  application:
+    name: hp-check
+  profiles:
+    active: dev
+
+  cloud:
+    nacos:
+      server-addr: 192.168.142.133:8848
+      config:
+        # 配置文件格式
+        file-extension: yaml
+        # 共享配置
+        shared-configs:
+          - dataId: hp-admin-dev.yaml
+
+management:
+  health:
+    elasticsearch:
+      enabled: false

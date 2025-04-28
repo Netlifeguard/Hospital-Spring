@@ -1,0 +1,168 @@
+server:
+  port: 9999
+
+spring:
+  application:
+    name: hp-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.142.133:8848
+
+    gateway:
+      routes:
+        - id: hp-patient
+          uri: lb://hp-patient
+          predicates:
+            - Path=/patient/**
+        #          filters:
+        #            - name: RequestRateLimiter
+        #              args:
+        #                redis-rate-limiter.replenishRate: 10
+        #                redis-rate-limiter.burstCapacity: 20
+        #                key-resolver: "#{@MyKeyResolver}"  # 例如基于IP地址进行限流
+
+        - id: hp-doctor
+          uri: lb://hp-doctor
+          predicates:
+            - Path=/doctor/**
+
+        - id: hp-admin
+          uri: lb://hp-admin
+          predicates:
+            - Path=/admin/**
+
+        - id: hp-admin-arrange
+          uri: lb://hp-admin
+          predicates:
+            - Path=/arrange/**
+
+        - id: hp-admin-order
+          uri: lb://hp-admin
+          predicates:
+            - Path=/order/**
+
+        - id: hp-check
+          uri: lb://hp-check
+          predicates:
+            - Path=/check/**
+
+        - id: hp-check-drug
+          uri: lb://hp-check
+          predicates:
+            - Path=/drug/**
+
+        - id: hp-bed
+          uri: lb://hp-bed
+          predicates:
+            - Path=/bed/**
+
+        - id: hp-auth
+          uri: lb://hp-auth
+          predicates:
+            - Path=/auth/**
+
+        - id: hp-mq
+          uri: lb://hp-mq
+          predicates:
+            - Path=/notice/**
+
+        - id: hp-netty
+          uri: ws://localhost:9091
+          predicates:
+            - Path=/netty/**
+
+        - id: hp-netty-es
+          uri: lb://hp-netty
+          predicates:
+            - Path=/es/**
+
+        - id: hp-coupons
+          uri: lb://hp-coupons
+          predicates:
+            - Path=/coupon/**
+
+        - id: hp-coupons-user
+          uri: lb://hp-coupons
+          predicates:
+            - Path=/userCoupon/**
+
+
+
+
+hp:
+  auth:
+    excludePaths:
+      - /admin/login
+      - /admin/logout
+      - /doctor/login
+      - /doctor/logout
+      - /patient/login
+      - /patient/logout
+      - /auth/**
+#      - /netty/**
+#      - /es/**
+#      - /arrange/**
+#      - /check/**
+#      - /drug/**
+#      - /bed/**
+#      - /order/**
+
+#  gateway:
+#    routes:
+#      - id: hp-patient
+#        uri: http://localhost:8091
+#        predicates:
+#          - Path=/patient/**
+#
+#      - id: hp-doctor
+#        uri: http://localhost:8093
+#        predicates:
+#          - Path=/doctor/**
+#
+#      - id: hp-admin
+#        uri: http://localhost:8092
+#        predicates:
+#          - Path=/admin/**
+#      - id: hp-arrange
+#        uri: http://localhost:8092
+#        predicates:
+#          - Path=/arrange/**
+#      - id: hp-order
+#        uri: http://localhost:8092
+#        predicates:
+#          - Path=/order/**
+#
+#      - id: hp-check
+#        uri: http://localhost:8094
+#        predicates:
+#          - Path=/check/**
+#      - id: hp-check
+#        uri: http://localhost:8094
+#        predicates:
+#          - Path=/drug/**
+#
+#      - id: hp-bed
+#        uri: http://localhost:8095
+#        predicates:
+#          - Path=/bed/**
+#
+#      - id: hp-auth
+#        uri: http://localhost:8097
+#        predicates:
+#          - Path=/auth/**
+#
+#      - id: hp-mq
+#        uri: http://localhost:8098
+#        predicates:
+#          - Path=/notice/**
+#
+#      - id: hp-netty
+#        uri: ws://localhost:9091
+#        predicates:
+#          - Path=/netty/**
+#
+#      - id: hp-netty-es
+#        uri: http://localhost:8099
+#        predicates:
+#          - Path=/es/**

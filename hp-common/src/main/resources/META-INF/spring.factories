@@ -1,0 +1,14 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+ com.nie.common.config.MPConfig,\
+ com.nie.common.config.UserInterceptorConfig,\
+ com.nie.common.config.RedisConfig,\
+ com.nie.common.exception.SQLGlobalException,\
+ com.nie.common.config.MqConfig,\
+ com.nie.common.tools.RedisOPS,\
+ com.nie.common.tools.ChannelGroupManage,\
+ com.nie.common.config.SpringCacheConfig,\
+ com.nie.common.config.RedissonConfig,\
+ com.nie.common.config.BcryptConfig,\
+ com.nie.common.config.SecurityConfig,\
+ com.nie.common.config.SessionConfig,\
+ com.nie.common.config.WebMvcConfig
