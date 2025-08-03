@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "hp.auth",
+      "type": "com.nie.gateway.config.FilterPath",
+      "sourceType": "com.nie.gateway.config.FilterPath"
+    }
+  ],
+  "properties": [
+    {
+      "name": "hp.auth.exclude-paths",
+      "type": "java.lang.String[]",
+      "sourceType": "com.nie.gateway.config.FilterPath"
+    }
+  ],
+  "hints": []
+}

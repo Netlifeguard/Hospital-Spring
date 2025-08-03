@@ -1,0 +1,6 @@
+com\nie\gateway\HPGatewayApplication.class
+com\nie\gateway\config\FilterPath.class
+com\nie\gateway\filter\HospitalGlobalFilter.class
+com\nie\gateway\anno\IsToken.class
+com\nie\gateway\tools\JwtUtil.class
+META-INF\spring-configuration-metadata.json
