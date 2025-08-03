@@ -1,0 +1,98 @@
+# ###########################
+# 通用忽略规则（适用于所有Java项目）
+# ###########################
+
+# 1. 构建产物（编译、打包生成的文件）
+target/                     # Maven/Gradle 构建目录（子模块的target也会被忽略）
+build/                      # Gradle 构建目录
+out/                        # IDE 编译输出目录
+*.class                     # 编译生成的class文件
+
+# 2. 依赖缓存
+.m2/                        # Maven 本地仓库缓存（通常在用户目录，但若项目内有则忽略）
+.gradle/                    # Gradle 缓存目录
+gradle/                     # Gradle  wrapper 目录（如需提交可删除此行）
+!gradle/wrapper/gradle-wrapper.jar  # 保留gradle wrapper（可选）
+
+# 3. IDE 相关文件（IntelliJ IDEA、Eclipse等）
+.idea/                      # IDEA 项目配置目录（包含所有子模块的IDE配置）
+*.iml                       # IDEA 模块文件
+*.iws                       # IDEA 工作区文件
+*.ipr                       # IDEA 项目文件
+..project                   # Eclipse 项目文件
+.classpath                  # Eclipse 类路径文件
+.settings/                  # Eclipse 配置目录
+*.launch                    # Eclipse 启动配置
+.factorypath                # Eclipse 工厂路径配置
+
+# 4. 操作系统相关文件
+.DS_Store                   # Mac 系统文件
+Thumbs.db                   # Windows 缩略图缓存
+*.swp                       # Vi/Vim 临时文件
+*.swo                       # Vi/Vim 交换文件
+*~                          # 临时文件（如编辑器自动生成）
+
+# 5. 日志文件
+logs/                       # 日志目录
+*.log                       # 所有日志文件
+log/                        # 小写日志目录（避免不同命名风格）
+
+# 6. 配置文件与敏感信息
+*.properties                # 本地配置文件（若包含密码等敏感信息）
+*.yml                       # 本地YAML配置文件（同上）
+!src/main/resources/*.properties  # 保留源代码中的默认配置（按需调整）
+!src/main/resources/*.yml        # 保留源代码中的默认配置（按需调整）
+*.key                       # 密钥文件
+*.pem                       # 证书文件
+.env                        # 环境变量文件（通常包含敏感信息）
+.env.local                  # 本地环境变量文件
+
+# 7. 其他临时文件
+tmp/                        # 临时目录
+temp/                       # 临时目录
+*.bak                       # 备份文件
+*.tmp                       # 临时文件
+*.old                       # 旧文件备份
+
+# ###########################
+# 框架/工具特定忽略规则
+# ###########################
+
+# Spring Boot 相关
+spring-boot-starter/        # 若有本地解压的starter包（通常不需要）
+*.original                  # Spring Boot 打包时生成的原始配置文件
+
+# Dubbo 相关
+dubbo-logs/                 # Dubbo 日志目录（若项目中有单独配置）
+
+# 数据库相关
+*.sql                       # 本地SQL脚本（若包含敏感数据）
+*.sqlite                    # SQLite 数据库文件
+*.db                        # 其他数据库文件
+
+# 测试相关
+*.surefire-reports/         # Maven Surefire 测试报告
+*.failsafe-reports/         # Maven Failsafe 测试报告
+test-output/                # 测试输出目录
+
+# ###########################
+# 注意事项
+# ###########################
+# 1. 若某些文件需要强制提交，可在规则前加 "!"（如保留特定配置文件）
+# 2. 此配置会递归作用于所有子模块，无需在子模块单独创建.gitignore
+# 3. 若之前已提交过需忽略的文件，需先执行：git rm --cached <文件名> 再提交
+# 忽略所有 jar 文件
+*.jar
+
+# 特别地，忽略 Maven/Gradle 打包生成的 jar（通常在 target/build 目录下）
+target/*.jar
+build/*.jar
+
+# 若有其他目录生成 jar，也可针对性忽略
+# 例如：lib/*.jar
+# 忽略 Maven 自动生成的 pom.properties
+**/target/maven-archiver/pom.properties
+**/target/**/pom.properties  # 更通用的匹配，覆盖子模块场景
+*.lst
+
+target/

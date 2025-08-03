@@ -1,0 +1,36 @@
+server:
+  port: 9520
+
+spring:
+  application:
+    name: dubbo-service
+  config:
+    import:
+      - optional:nacos:dubbo_demo.yaml  # 动态配置（允许不存在）
+  cloud:
+    nacos:
+      server-addr: 192.168.142.133:8848  # 地址与namespace分离
+      discovery: # 必须添加服务发现配置
+        server-addr: ${spring.cloud.nacos.server-addr}
+        register-enabled: true  # 显式开启注册
+      config:
+        file-extension: yaml
+        shared-configs:
+          - dataId: dubbo_demo.yaml
+            group: DEFAULT_GROUP
+            refresh: true  # 启用动态刷新
+
+dubbo:
+  application:
+    name: dubbo-service
+    qos-enable: false
+  registry:
+    address: nacos://192.168.142.133:8848
+    parameters:
+      check: "false"  # 关闭启动时健康检查
+  protocol:
+    name: dubbo
+    port: 20880  # 若冲突可改为 -1（自动分配）
+  scan:
+    base-packages: com.example.services.ai1 # 确保包含@DubboService类
+
